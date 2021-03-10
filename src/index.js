@@ -6,6 +6,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './store/reducer.js';
 import thunk from 'redux-thunk';
+import {ActionCreator} from './store/actions.js';
 
 import './index.styl';
 
@@ -15,6 +16,8 @@ const store = createStore(
         applyMiddleware(thunk)
     )
 );
+
+store.dispatch(ActionCreator.updateStudents);
 
 ReactDOM.render(
     <Provider store={store}>

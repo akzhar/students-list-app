@@ -4,43 +4,43 @@
   "name": "Григорьева Светлана",
   "rating": "65",
   "age": "21",
-  "image": "https://www.fillmurray.com/200/200",
+  "avatar": "https://www.placecage.com/300/300",
   "specialization": "Прикладная информатика",
   "group": "ПИ-101",
   "sex": "Женский",
-  "favorite_color": "Зеленый"
+  "favoriteColor": "green"
   },
   {
     "id": "2",
     "name": "Степанова Анна",
     "rating": "29",
     "age": "20",
-    "image": "https://www.fillmurray.com/200/200",
+    "avatar": "https://www.fillmurray.com/200/200",
     "specialization": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Женский",
-    "favorite_color": "Голубой"
+    "favoriteColor": "blue"
   },
   {
     "id": "3",
     "name": "Cундар Пичаи",
     "rating": "80",
     "age": "19",
-    "image": "https://www.fillmurray.com/200/200",
+    "avatar": "https://www.stevensegallery.com/200/200",
     "specialization": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Мужской",
-    "favorite_color": "Черный"
+    "favoriteColor": "black"
   },
   {
     "id": "4",
     "name": "Алексеев Александр",
     "rating": "46",
     "age": "22",
-    "image": "https://www.fillmurray.com/200/200",
+    "avatar": "https://www.fillmurray.com/300/200",
     "specialization": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Мужской",
-    "favorite_color": "Радуга"
+    "favoriteColor": "rainbow"
   }
 ]

@@ -1,3 +1,5 @@
+@import "./const.styl"
+
 @font-face
   font-family 'Geometria-Regular'
   font-display swap
@@ -13,10 +15,23 @@ html, body
 body
   margin 0
 
-@import "./const.styl"
+.visually-hidden
+  position absolute
+  width 1px
+  height 1px
+  margin -1px
+  border 0
+  padding 0
+  white-space nowrap
+  clip-path inset(100%)
+  clip rect(0 0 0 0)
+  overflow hidden
+
 @import "./components/button/button.styl"
 @import "./components/input/input.styl"
 @import "./components/container/container.styl"
 @import "./components/header/header.styl"
 @import "./components/logo/logo.styl"
 @import "./components/menu/menu.styl"
+@import "./components/students-list/students-list.styl"
+@import "./components/student-card/student-card.styl"

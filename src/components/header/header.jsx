@@ -1,15 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import Container from '../container/container.jsx';
+import Logo from '../logo/logo.jsx';
 
 const Header = () => (
-  <header className="page__header">
+  <header className="header">
     <Container>
-      <img className="logo" src="./img/logo.svg" width="42" height="42"/>
-      <Link to="/">
-        <b>STUDENTS</b> <small><span>by</span> akzhar</small>
-      </Link>
+      <Logo/>
     </Container>
   </header>
 );

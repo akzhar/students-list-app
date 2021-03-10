@@ -5,8 +5,6 @@ import StudentsScreen from '../students-screen/students-screen.jsx';
 import NewStudentScreen from '../new-student-screen/new-student-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-import './app.styl';
-
 const App = () => (
   <BrowserRouter>
     <Switch>

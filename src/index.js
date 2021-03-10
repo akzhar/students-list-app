@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 import reducer from './store/reducer.js';
 import thunk from 'redux-thunk';
 
+import './index.styl';
+
 const store = createStore(
     reducer,
     composeWithDevTools(

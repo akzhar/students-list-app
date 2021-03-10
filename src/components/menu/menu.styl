@@ -11,9 +11,29 @@
     justify-content space-between
     margin-bottom 40px
 
+  &__search-field,
+  &__sort-field
+    display flex
+    position relative
+
+    &::before
+      content ""
+      position absolute
+      top 50%
+      width 20px
+      height 20px
+      transform translate(0, -50%)
+
   &__search-field
-    width 905px
+    width 980px
+
+    &::before
+      left 20px
+      background url("../../../public/img/icons/search-icon.svg") no-repeat
 
   &__sort-field
-    box-sizing inherit
-    width 105px
+    width 180px
+
+    &::before
+      right 20px
+      background url("../../../public/img/icons/sort-icon.svg") no-repeat

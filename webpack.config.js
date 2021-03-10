@@ -14,7 +14,7 @@ module.exports = {
         rules: [
           {test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader'},
           {test: /\.styl$/i, loader: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader'],},
-          {test: /\.(png|jpe?g|gif)$/i, loader: 'file-loader'},
+          {test: /\.(png|jpe?g|svg)$/i, loader: 'file-loader'},
           {test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader'},
         ]
     },

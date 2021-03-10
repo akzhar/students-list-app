@@ -1,11 +1,9 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public')
-    },
+    output: {filename: 'bundle.js', path: path.resolve(__dirname, 'public')},
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
         open: false,
@@ -14,25 +12,13 @@ module.exports = {
     },
     module: {
         rules: [
-        {
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            use: {
-            loader: 'babel-loader',
-            },
-        },
-        {
-          test: /\.css$/i,
-          use: ['style-loader', 'css-loader']
-        },
-        {
-            test: /\.(png|jpe?g|gif)$/i,
-            use: ['file-loader'],
-        }
-        ],
+          {test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader'},
+          {test: /\.styl$/i, loader: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader'],},
+          {test: /\.(png|jpe?g|gif)$/i, loader: 'file-loader'},
+          {test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader'},
+        ]
     },
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    devtool: 'source-map',
+    plugins: [new MiniCssExtractPlugin({filename: 'bundle.css'})],
+    resolve: {extensions: ['.js', '.jsx']},
+    devtool: 'source-map'
 };

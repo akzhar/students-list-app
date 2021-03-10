@@ -2,14 +2,17 @@ import React from 'react';
 
 import Container from '../container/container.jsx';
 import Header from '../header/header.jsx';
+import Menu from '../menu/menu.jsx';
 
 const StudentsScreen = () => (
-  <div className="page">
+  <React.Fragment>
     <Header/>
-    <main className="page__students">
-      <Container>Students page</Container>
+    <main>
+      <Container>
+        <Menu/>
+      </Container>
     </main>
-  </div>
+  </React.Fragment>
 );
 
 export default StudentsScreen;

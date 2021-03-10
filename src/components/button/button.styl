@@ -1,0 +1,33 @@
+.button
+  position relative
+  padding 15px 76px
+  color white
+  font-weight 700
+  text-decoration none
+  border none
+  border-radius 10px
+  background-color app_color_brand
+
+  &:hover,
+  &:active
+    opacity 0.6
+
+  &--add
+    padding-left 120px
+
+    &::before,
+    &::after
+      content ""
+      position absolute
+      top 50%
+      left 80px
+      width 16px
+      height 2px
+      background-color white
+
+    &::before
+      transform translate(0, -50%)
+
+    &::after
+      transform translate(0, -50%) rotate(90deg)
+

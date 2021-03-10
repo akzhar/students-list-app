@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 const Logo = () => (
   <div className="logo">
-    <img src="./img/logo.svg" width="42" height="42"/>
+    <img src="./img/logo.svg" alt="logo" width="42" height="42"/>
     <Link to="/">
       STUDENTS by <span>akzhar</span>
     </Link>

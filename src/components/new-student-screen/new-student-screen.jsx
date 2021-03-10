@@ -4,12 +4,12 @@ import Container from '../container/container.jsx';
 import Header from '../header/header.jsx';
 
 const NewStudentScreen = () => (
-  <div className="page">
+  <React.Fragment>
     <Header/>
-    <main className="page__students">
+    <main>
       <Container>New student page</Container>
     </main>
-  </div>
+  </React.Fragment>
 );
 
 NewStudentScreen.propTypes = {};

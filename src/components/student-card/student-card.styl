@@ -2,36 +2,40 @@
   display flex
   align-items center
   justify-content space-between
-  margin-bottom 20px
+  margin-bottom 24px
 
   &:last-child
     margin-bottom 0
 
-  &__name
-    width 300px
+  &__avatar
+    box-sizing border-box
+    width 40px
+    height 40px
 
+  &__name,
   &__spec
-    width 280px
+    width 26%
 
-  &__group
-    width 80px
-
-  &__age
-    width 80px
-
+  &__group,
+  &__age,
   &__rating
-    width 80px
+    width 7%
 
   &__avatar,
   &__delete-btn,
   &__fav-color
-    width 30px
-    height 30px
     border 2px solid rgba(255, 255, 255, 0.6)
     border-radius 50%
 
+  &__delete-btn,
+  &__fav-color
+    box-sizing border-box
+    width 30px
+    height 30px
+
   &__delete-btn
-    background transparent url("../../../public/img/icons/trash-icon.svg") no-repeat center
+    background white url("../../../public/img/icons/trash-icon.svg") no-repeat center center
+    shadow-small()
 
     &:hover,
     &:active
@@ -40,34 +44,22 @@
   &__fav-color
 
     &--blue
-      background-color: fav_color_blue
+      background: fav_color_blue
 
     &--red
-      background-color: fav_color_red
+      background: fav_color_red
 
     &--green
-      background-color: fav_color_green
+      background: fav_color_green
 
     &--yellow
-      background-color: fav_color_yellow
+      background: fav_color_yellow
 
     &--black
-      background-color: fav_color_black
+      background: fav_color_black
 
     &--orange
-      background-color: fav_color_orange
+      background: fav_color_orange
 
     &--rainbow
-      background: linear-gradient(
-        to bottom,
-        #F00049 16.666%,
-        #FE5709 16.666%,
-        #FE5709 33.332%,
-        #FEDD02 33.332%,
-        #FEDD02 49.998%,
-        #00C209 49.998%,
-        #00C209 66.664%,
-        #0057E6 66.664%,
-        #0057E6 83.330%,
-        #8631C0 83.330%
-      )
+      background: fav_color_rainbow

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {studentTypes} from '../../prop-types/prop-types.jsx';
 
 const StudentsCard = ({student}) => (
-  <li className="students-list__card card">
+  <li className="students__card card">
     <img className="card__avatar" src={student.avatar} alt={student.name} width="40" height="40"/>
     <span className="card__name">{student.name}</span>
     <span className="card__spec">{student.specialization}</span>

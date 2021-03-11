@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {studentTypes} from '../../prop-types/prop-types.jsx';
 import {connect} from 'react-redux';
-import {ActiveSortToCompareFunc} from '../../const.js';
+import {SEARCH_BY_FIELD, SortTypeToCompareFunc} from '../../const.js';
 
 import StudentCard from '../student-card/student-card.jsx';
 
-const Students = ({activeSearch, activeSort, students}) => (
+const Students = ({searchSubstring, sortType, students}) => (
   <section className="students">
     <div className="students__header">
       <span></span>
@@ -19,7 +19,15 @@ const Students = ({activeSearch, activeSort, students}) => (
       <span></span>
     </div>
     <ul className="students__list">
-      {students.sort(ActiveSortToCompareFunc[activeSort]).map((student) => (
+      {students
+      .filter((student) => {
+        // регистронезависимый поиск
+        const field = student[SEARCH_BY_FIELD].toLowerCase();
+        const subString = searchSubstring.toLowerCase();
+        return field.indexOf(subString) !== -1;
+      })
+      .sort(SortTypeToCompareFunc[sortType])
+      .map((student) => (
         <StudentCard key={student.id} student={student}/>
       ))}
     </ul>
@@ -27,14 +35,14 @@ const Students = ({activeSearch, activeSort, students}) => (
 );
 
 const mapStateToProps = (state) => ({
-  activeSearch: state.activeSearch,
-  activeSort: state.activeSort,
+  searchSubstring: state.searchSubstring,
+  sortType: state.sortType,
   students: state.students
 });
 
 Students.propTypes = {
-  activeSearch: PropTypes.string.isRequired,
-  activeSort: PropTypes.string.isRequired,
+  searchSubstring: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
   students: PropTypes.arrayOf(PropTypes.shape(studentTypes)).isRequired
 };
 

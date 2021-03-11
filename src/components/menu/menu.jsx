@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {SORT_OPTIONS} from '../../const.js';
 
+import Select from '../select/select.jsx';
+
 const Menu = () => (
   <section className="menu">
     <div className="menu__row">
@@ -10,14 +12,10 @@ const Menu = () => (
     </div>
     <form className="menu__row" action="#" method="get">
       <div className="menu__search-field">
-        <input className="input input--search" type="text" name="name" placeholder="Поиск по имени"/>
+        <input className="input" type="text" name="name" placeholder="Поиск по имени"/>
       </div>
       <div className="menu__sort-field">
-        <select className="input input--select" name="sort">
-          {SORT_OPTIONS.map((option) => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        <Select options={SORT_OPTIONS}/>
       </div>
     </form>
   </section>

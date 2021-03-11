@@ -1,0 +1,50 @@
+.select
+  position relative
+  cursor pointer
+
+  &:hover
+    border-color app_color_brand
+
+  &__options
+    display none
+    list-style none
+    margin 0
+    padding 10px
+    min-width 180px
+    position absolute
+    top calc(100% + 1px)
+    left 0
+    z-index 1
+    background-color white
+    border-radius 6px
+    shadow-big()
+
+    &--opened
+      display block
+
+  &__option
+    position relative
+    padding 8px 12px
+    margin-bottom 10px
+    border-radius 6px
+    transition background 0.3s
+    cursor pointer
+
+    &:last-child
+      margin-bottom 0
+
+    &--active::after
+      content ""
+      position absolute
+      top 50%
+      right 20px
+      width 10px
+      height 8px
+      background url("../../img/icons/tick-icon.svg") no-repeat center center
+      transform translate(0, -50%)
+
+    &--active,
+    &:focus,
+    &:hover
+      background-color rgba(73, 194, 232, 0.1)
+

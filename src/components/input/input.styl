@@ -1,20 +1,22 @@
-.input
-  padding 15px 20px
+.input,
+.select
+  display block
+  width 100%
+  padding 14px 20px
   font-size 1rem
   line-height 1.3rem
   font-weight 500
-  border none
+  border 1px solid transparent
   border-radius 6px
   shadow-big()
 
-  &--search
-    width 100%
-    padding-left 55px
+  &:hover
+    border-color app_color_brand
 
-  &--select
-    width 100%
-    padding-right 25px
-    box-sizing inherit
-    appearance none
-    font-size 0.8rem
-    line-height 0.9rem
+  &--warning
+    border-color app_color_warning
+    color app_color_warning
+
+    &:hover,
+    &::placeholder
+      border-color app_color_warning

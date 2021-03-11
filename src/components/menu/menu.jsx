@@ -10,10 +10,10 @@ const Menu = () => (
       <h1>Студенты</h1>
       <Link to="/new" className="button button--add">Добавить студента</Link>
     </div>
-    <form className="menu__row" action="#" method="get">
+    <div className="menu__row">
       <MenuSearchField/>
       <MenuSortField/>
-    </form>
+    </div>
   </section>
 );
 

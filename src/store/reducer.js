@@ -2,6 +2,7 @@ import {ActionType} from './actions.js';
 import {SORT_OPTIONS} from '../const.js';
 
 const initialState = {
+  activeSearch: ``,
   activeSort: SORT_OPTIONS[0],
   studentsIsLoaded: false,
   students: []
@@ -9,6 +10,8 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ActionType.CHANGE_ACTIVESEARCH:
+      return {...state, activeSearch: action.payload};
     case ActionType.CHANGE_ACTIVESORT:
       return {...state, activeSort: action.payload};
     case ActionType.SET_STUDENTS_IS_LOADED:

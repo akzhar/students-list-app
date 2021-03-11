@@ -1,12 +1,15 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 
-const Select = ({options}) => {
+const Select = ({options, initialActive = ``, onActiveOptionChange = null}) => {
 
-  const [activeOption, setActiveOption] = useState(options[0]);
+  const [activeOption, setActiveOption] = useState(initialActive || options[0]);
   const selectRef = useRef();
 
   const onOptionSelection = (newActiveOption) => {
+    if (onActiveOptionChange && activeOption !== newActiveOption) {
+      onActiveOptionChange(newActiveOption);
+    }
     setActiveOption(newActiveOption);
     selectRef.current.classList.remove(`select__options--opened`);
   };
@@ -48,7 +51,9 @@ const Select = ({options}) => {
 };
 
 Select.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  initialActive: PropTypes.string,
+  onActiveOptionChange: PropTypes.func
 };
 
 export default Select;

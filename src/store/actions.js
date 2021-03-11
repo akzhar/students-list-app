@@ -1,12 +1,14 @@
 import students from '../mocks/students.json';
 
 export const ActionType = {
+  CHANGE_ACTIVESEARCH: `change/activeSearch`,
   CHANGE_ACTIVESORT: `change/activeSort`,
   SET_STUDENTS_IS_LOADED: `set/studentsIsLoaded`,
   UPDATE_STUDENTS: `update/students`
 };
 
 export const ActionCreator = {
+  changeActiveSearch: (newActiveSearch) => ({type: ActionType.CHANGE_ACTIVESEARCH, payload: newActiveSearch}),
   changeActiveSort: (newActiveSort) => ({type: ActionType.CHANGE_ACTIVESORT, payload: newActiveSort}),
   updateStudents: (dispatch, _getStore) => {
     dispatch({type: ActionType.SET_STUDENTS_IS_LOADED});

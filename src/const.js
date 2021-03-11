@@ -1,5 +1,7 @@
 export const SEARCH_BY_FIELD = `name`;
 export const SORT_TYPES = [`Имя`, `Рейтинг`, `Возраст`, `Любимый цвет`];
+export const SEX_TYPES = [`Мужской`, `Женский`];
+export const AVAILABLE_COLORS = [`blue`, `red`, `green`, `yellow`, `black`, `orange`, `rainbow`];
 export const SortTypeToCompareFunc = {
   "Имя": (a, b) => {
     if (a.name < b.name) {

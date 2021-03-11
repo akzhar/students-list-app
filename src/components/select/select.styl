@@ -5,12 +5,29 @@
   &:hover
     border-color app_color_brand
 
+  &::after
+    content ""
+    position absolute
+    top 50%
+    right 20px
+    width 10px
+    height 7px
+    transform translate(0, -50%)
+    background url("../../img/icons/arrow-select-icon.svg") no-repeat center center
+
+  &--opened
+
+    &::after
+      transform rotate(180deg)
+      transition 0.3s
+
   &__options
     display none
     list-style none
     margin 0
     padding 10px
-    min-width 180px
+    box-sizing border-box
+    width 100%
     position absolute
     top calc(100% + 1px)
     left 0

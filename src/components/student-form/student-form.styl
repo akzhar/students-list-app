@@ -1,0 +1,53 @@
+.student-form
+  padding-top 28px
+
+  & fieldset
+    display flex
+    margin 0 0 40px 0
+    padding 0
+    border none
+
+  &__avatar
+    box-sizing border-box
+    width 82px
+    height 82px
+    margin-right 20px
+    border 2px solid rgba(255, 255, 255, 0.6)
+    border-radius 50%
+    shadow-small()
+
+  &__avatar-upload
+      display flex
+      flex-direction column
+      justify-content center
+
+      & label
+        text-decoration underline
+        margin-bottom 8px
+
+        &:hover,
+        &:active
+          opacity 0.6
+
+    input[type="file"]
+      display none
+
+  &__col
+    width 380px
+    margin 0 120px 0 0
+
+    &:last-child
+      margin-right 0
+
+  &__question
+    margin-bottom 20px
+
+    & label
+      display block
+      margin-bottom 8px
+
+    &:last-child
+      margin-bottom 0
+
+  & button[type="submit"]
+      width 380px

@@ -1,0 +1,26 @@
+.navigation
+  margin-bottom 18px
+
+  a
+    position relative
+    padding-left 30px
+    margin-right 30px
+    font-size 0.8rem
+    line-height 1rem
+    color app_color_text
+    text-decoration none
+    text-transform uppercase
+
+    &:hover,
+    &:active
+      opacity 0.6
+
+    &::before
+      content ""
+      position absolute
+      top 50%
+      left 0
+      width 20px
+      height 20px
+      transform translate(0, -50%)
+      background url("../../img/icons/arrow-left-icon.svg") no-repeat center center

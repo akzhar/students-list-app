@@ -1,10 +1,10 @@
 .input,
 .select
   display block
+  box-sizing border-box
   width 100%
   padding 14px 20px
   font-size 1rem
-  line-height 1.3rem
   font-weight 500
   border 1px solid transparent
   border-radius 6px
@@ -13,10 +13,14 @@
   &:hover
     border-color app_color_brand
 
+  &::placeholder
+    color app_color_placeholder
+
   &--warning
     border-color app_color_warning
     color app_color_warning
 
     &:hover,
     &::placeholder
+      color app_color_warning
       border-color app_color_warning

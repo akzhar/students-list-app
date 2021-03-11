@@ -1,19 +1,19 @@
 import {ActionType} from './actions.js';
-import {SORT_OPTIONS} from '../const.js';
+import {SORT_TYPES} from '../const.js';
 
 const initialState = {
-  activeSearch: ``,
-  activeSort: SORT_OPTIONS[0],
+  searchSubstring: ``,
+  sortType: SORT_TYPES[0],
   studentsIsLoaded: false,
   students: []
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_ACTIVESEARCH:
-      return {...state, activeSearch: action.payload};
-    case ActionType.CHANGE_ACTIVESORT:
-      return {...state, activeSort: action.payload};
+    case ActionType.CHANGE_SEARCH_SUBSTRING:
+      return {...state, searchSubstring: action.payload};
+    case ActionType.CHANGE_SORTTYPE:
+      return {...state, sortType: action.payload};
     case ActionType.SET_STUDENTS_IS_LOADED:
       return {...state, studentsIsLoaded: true};
     case ActionType.UPDATE_STUDENTS:

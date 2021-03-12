@@ -1,17 +1,20 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 
-const Select = ({options, initialActive = ``, onActiveOptionChange = null}) => {
+const Select = ({options, name, initial = ``, onChange = null}) => {
 
-  const [activeOption, setActiveOption] = useState(initialActive || options[0]);
+  const initialValue = initial || options[0];
+  const [activeOption, setActiveOption] = useState(initialValue);
   const selectRef = useRef();
   const selectOptionsRef = useRef();
 
   const onOptionSelection = (newActiveOption) => {
-    if (onActiveOptionChange && activeOption !== newActiveOption) {
-      onActiveOptionChange(newActiveOption);
+    if (activeOption !== newActiveOption) {
+      setActiveOption(newActiveOption);
+      if (onChange) {
+        onChange(newActiveOption);
+      }
     }
-    setActiveOption(newActiveOption);
   };
 
   const toggleSelectOptions = () => {
@@ -43,7 +46,15 @@ const Select = ({options, initialActive = ``, onActiveOptionChange = null}) => {
       onClick={handleSelectClick}
       onKeyDown={handleSelectSpaceDown}
     >
-      {activeOption}
+      <input
+        type="text"
+        readOnly
+        className="visually-hidden"
+        id={name}
+        name={name}
+        value={activeOption}
+      />
+      <output>{activeOption}</output>
       <ul
         className="select__options"
         ref={selectOptionsRef}
@@ -66,8 +77,9 @@ const Select = ({options, initialActive = ``, onActiveOptionChange = null}) => {
 
 Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  initialActive: PropTypes.string,
-  onActiveOptionChange: PropTypes.func
+  name: PropTypes.string.isRequired,
+  initial: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default Select;

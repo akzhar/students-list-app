@@ -10,8 +10,9 @@ const MenuSortField = ({sortType, onSortTypeChange}) => (
   <div className="menu__sort-field">
     <Select
       options={SORT_TYPES}
-      initialActive={sortType}
-      onActiveOptionChange={onSortTypeChange}
+      name="sortType"
+      initial={sortType}
+      onChange={onSortTypeChange}
     />
   </div>
 );

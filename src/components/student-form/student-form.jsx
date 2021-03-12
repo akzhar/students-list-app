@@ -1,5 +1,5 @@
-import React from 'react';
-import {SEX_TYPES, AVAILABLE_COLORS} from '../../const.js';
+import React, {useRef} from 'react';
+import {SEX_TYPES, AVAILABLE_COLORS, VALID_IMG_TYPES} from '../../const.js';
 import SPECIALISATIONS from '../../mocks/specialisations.json';
 import GROUPS from '../../mocks/groups.json';
 
@@ -7,14 +7,77 @@ import Select from '../select/select.jsx';
 
 import avatar from '../../img/avatar.svg';
 
-const StudentForm = () => (
-  <form className="student-form" action="#" method="post">
-    <fieldset>
+const StudentForm = () => {
+
+  const avatarImageRef = useRef();
+  const avatarInputRef = useRef();
+  const avatarDropZoneRef = useRef();
+
+  const avatarDropZoneHighlight = () => {
+    avatarDropZoneRef.current.classList.add(`student-form__avatar-dropzone--dragged-over`);
+  };
+
+  const avatarDropZoneLowlight = () => {
+    avatarDropZoneRef.current.classList.remove(`student-form__avatar-dropzone--dragged-over`);
+  };
+
+  const onAvatarDropZoneDragEnter = (evt) => {
+    evt.preventDefault();
+    avatarDropZoneHighlight();
+  };
+
+  const onAvatarDropZoneDragOver = (evt) => {
+    evt.preventDefault();
+  };
+
+  const onAvatarDropZoneDragLeave = (evt) => {
+    evt.preventDefault();
+    avatarDropZoneLowlight();
+  };
+
+  const onAvatarDropZoneDrop = (evt) => {
+    evt.preventDefault();
+    avatarDropZoneLowlight();
+    const file = evt.dataTransfer.files[0];
+    renderAvatarIfFileIsValid(file);
+  };
+
+  const onAvatarInputChange = () => {
+    const file = avatarInputRef.current.files[0];
+    renderAvatarIfFileIsValid(file);
+  };
+
+  const renderAvatar = (evt) => {
+    avatarImageRef.current.src = evt.target.result;
+  };
+
+  const renderAvatarIfFileIsValid = (file) => {
+    if (VALID_IMG_TYPES.includes(file.type)) {
+      const fReader = new FileReader();
+      fReader.readAsDataURL(file);
+      fReader.addEventListener(`load`, renderAvatar);
+    } else {
+      // TODO: add popup message
+      // alert(`Please choose a valid img type`);
+    }
+  };
+
+  return <form className="student-form" action="#" method="post">
+    <fieldset
+      className="student-form__avatar-dropzone"
+      ref={avatarDropZoneRef}
+      onDragEnter={onAvatarDropZoneDragEnter}
+      onDragOver={onAvatarDropZoneDragOver}
+      onDragLeave={onAvatarDropZoneDragLeave}
+      onDrop={onAvatarDropZoneDrop}
+    >
       <legend className="visually-hidden">Загрузка аватара нового студента</legend>
-      <img className="student-form__avatar" src={avatar} alt="Аватар нового студента" width="82" height="82"/>
+      <div className="student-form__avatar">
+        <img src={avatar} alt="Аватар нового студента" ref={avatarImageRef}/>
+      </div>
       <div className="student-form__avatar-upload">
         <label htmlFor="avatar">Сменить аватар</label>
-        <input id="avatar" type="file"/>
+        <input id="avatar" type="file" ref={avatarInputRef} onChange={onAvatarInputChange}/>
         <span>500x500</span>
       </div>
     </fieldset>
@@ -54,7 +117,7 @@ const StudentForm = () => (
       </div>
     </fieldset>
     <button className="button" type="submit" disabled>Создать</button>
-  </form>
-);
+  </form>;
+};
 
 export default StudentForm;

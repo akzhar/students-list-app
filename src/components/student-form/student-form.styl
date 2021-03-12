@@ -8,13 +8,29 @@
     border none
 
   &__avatar
-    box-sizing border-box
+    position relative
     width 82px
     height 82px
     margin-right 20px
     border 2px solid rgba(255, 255, 255, 0.6)
     border-radius 50%
     shadow-small()
+    overflow hidden
+
+    & img
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      width 100%
+
+  &__avatar-dropzone
+
+      &--dragged-over
+        opacity 0.6
+
+        & label
+          color app_color_brand
 
   &__avatar-upload
       display flex
@@ -25,12 +41,12 @@
         text-decoration underline
         margin-bottom 8px
 
-        &:hover,
-        &:active
+        &:hover
+          color app_color_brand
           opacity 0.6
 
-    input[type="file"]
-      display none
+      & input[type="file"]
+        display none
 
   &__col
     width 380px

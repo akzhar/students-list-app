@@ -9,9 +9,52 @@ import avatar from '../../img/avatar.svg';
 
 const StudentForm = () => {
 
+  const formRef = useRef();
+  const nameInputRef = useRef();
+  const emailInputRef = useRef();
+  const ratingInputRef = useRef();
   const avatarImageRef = useRef();
   const avatarInputRef = useRef();
   const avatarDropZoneRef = useRef();
+  const btnSubmitRef = useRef();
+
+  const formReset = () => {
+    formRef.current.reset();
+    avatarImageRef.current.src = avatar;
+    // TODO: reset (re-render) Select's ?
+  };
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(formRef.current);
+    // eslint-disable-next-line no-console
+    console.log({
+      avatar: formData.get(`avatar`),
+      name: formData.get(`name`),
+      email: formData.get(`email`),
+      specialisation: formData.get(`specialisation`),
+      group: formData.get(`group`),
+      rating: formData.get(`rating`),
+      sex: formData.get(`sex`),
+      favoriteColor: formData.get(`favoriteColor`)
+    });
+    formReset();
+    btnSubmitRef.current.disabled = true;
+    // TODO: add popup message & redirect ?
+    // alert(`New student was successfully added`);
+  };
+
+  const handleInputChange = () => {
+    if (
+      nameInputRef.current.value &&
+      emailInputRef.current.value &&
+      ratingInputRef.current.value
+    ) {
+      btnSubmitRef.current.disabled = false;
+    } else {
+      btnSubmitRef.current.disabled = true;
+    }
+  };
 
   const avatarDropZoneHighlight = () => {
     avatarDropZoneRef.current.classList.add(`student-form__avatar-dropzone--dragged-over`);
@@ -21,13 +64,9 @@ const StudentForm = () => {
     avatarDropZoneRef.current.classList.remove(`student-form__avatar-dropzone--dragged-over`);
   };
 
-  const onAvatarDropZoneDragEnter = (evt) => {
-    evt.preventDefault();
-    avatarDropZoneHighlight();
-  };
-
   const onAvatarDropZoneDragOver = (evt) => {
     evt.preventDefault();
+    avatarDropZoneHighlight();
   };
 
   const onAvatarDropZoneDragLeave = (evt) => {
@@ -62,11 +101,10 @@ const StudentForm = () => {
     }
   };
 
-  return <form className="student-form" action="#" method="post">
+  return <form className="student-form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
     <fieldset
       className="student-form__avatar-dropzone"
       ref={avatarDropZoneRef}
-      onDragEnter={onAvatarDropZoneDragEnter}
       onDragOver={onAvatarDropZoneDragOver}
       onDragLeave={onAvatarDropZoneDragLeave}
       onDrop={onAvatarDropZoneDrop}
@@ -77,7 +115,7 @@ const StudentForm = () => {
       </div>
       <div className="student-form__avatar-upload">
         <label htmlFor="avatar">Сменить аватар</label>
-        <input id="avatar" type="file" ref={avatarInputRef} onChange={onAvatarInputChange}/>
+        <input id="avatar" type="file" name="avatar" ref={avatarInputRef} onChange={onAvatarInputChange}/>
         <span>500x500</span>
       </div>
     </fieldset>
@@ -86,37 +124,37 @@ const StudentForm = () => {
       <div className="student-form__col">
         <div className="student-form__question">
           <label htmlFor="name">ФИО</label>
-          <input className="input" type="text" id="name" placeholder="Иванов Иван Иванович"/>
+          <input className="input" type="text" name="name" required id="name" placeholder="Иванов Иван Иванович" ref={nameInputRef} onChange={handleInputChange}/>
         </div>
         <div className="student-form__question">
           <label htmlFor="email">Email</label>
-          <input className="input" type="email" id="email" placeholder="ivanov@gmail.com"/>
+          <input className="input" type="email" id="email" name="email" required placeholder="ivanov@gmail.com" ref={emailInputRef} onChange={handleInputChange}/>
         </div>
         <div className="student-form__question">
-          <label htmlFor="spec">Специальность</label>
-          <Select options={SPECIALISATIONS.map((option) => option.name)}/>
+          <label htmlFor="specialisation">Специальность</label>
+          <Select options={SPECIALISATIONS.map((option) => option.name)} name="specialisation"/>
         </div>
         <div className="student-form__question">
           <label htmlFor="group">Группа</label>
-          <Select options={GROUPS.map((option) => option.name)}/>
+          <Select options={GROUPS.map((option) => option.name)} name="group"/>
         </div>
         <div className="student-form__question">
           <label htmlFor="rating">Рейтинг</label>
-          <input className="input" type="number" min="0" id="rating" placeholder="0"/>
+          <input className="input" type="number" min="1" id="rating" name="rating" required placeholder="0" ref={ratingInputRef} onChange={handleInputChange}/>
         </div>
       </div>
       <div className="student-form__col">
         <div className="student-form__question">
-          <label>Пол</label>
-          <Select options={SEX_TYPES}/>
+          <label htmlFor="sex">Пол</label>
+          <Select options={SEX_TYPES} name="sex"/>
         </div>
         <div className="student-form__question">
-          <label>Любимый цвет</label>
-          <Select options={AVAILABLE_COLORS}/>
+          <label htmlFor="favoriteColor">Любимый цвет</label>
+          <Select options={AVAILABLE_COLORS} name="favoriteColor"/>
         </div>
       </div>
     </fieldset>
-    <button className="button" type="submit" disabled>Создать</button>
+    <button className="button" type="submit" ref={btnSubmitRef} disabled={true}>Создать</button>
   </form>;
 };
 

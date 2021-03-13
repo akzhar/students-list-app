@@ -150,7 +150,7 @@ const StudentForm = () => {
         </div>
         <div className="student-form__question">
           <label htmlFor="favoriteColor">Любимый цвет</label>
-          <Select options={AVAILABLE_COLORS} name="favoriteColor"/>
+          <Select options={AVAILABLE_COLORS} name="favoriteColor" optionType="color"/>
         </div>
       </div>
     </fieldset>

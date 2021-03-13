@@ -1,9 +1,12 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 
-const Select = ({options, name, initial = ``, onChange = null}) => {
+import SelectOptionText from '../select/select-option-text.jsx';
+import SelectOptionColor from '../select/select-option-color.jsx';
 
-  const initialValue = initial || options[0];
+const Select = ({options, name, optionType = `text`, initial = ``, onChange = null}) => {
+
+  const initialValue = (initial && options.find((option) => option === initial)) ? initial : ``;
   const [activeOption, setActiveOption] = useState(initialValue);
   const selectRef = useRef();
   const selectOptionsRef = useRef();
@@ -38,9 +41,18 @@ const Select = ({options, name, initial = ``, onChange = null}) => {
     }
   };
 
+  const getOptionComponent = (option, isActive) => {
+    switch (optionType) {
+      case `color`:
+        return <SelectOptionColor option={option} isActive={isActive}/>;
+      default:
+        return <SelectOptionText option={option} isActive={isActive}/>;
+    }
+  };
+
   return <React.Fragment>
     <div
-      className="select"
+      className={`select select--${optionType}`}
       ref={selectRef}
       tabIndex="0"
       onClick={handleSelectClick}
@@ -49,25 +61,23 @@ const Select = ({options, name, initial = ``, onChange = null}) => {
       <input
         type="text"
         readOnly
-        className="visually-hidden"
         id={name}
         name={name}
         value={activeOption}
+        placeholder="Выбрать"
       />
-      <output>{activeOption}</output>
       <ul
         className="select__options"
         ref={selectOptionsRef}
-        onClick={handleOptionSelect}
-        onKeyDown={handleOptionsSpaceDown}
       >
         {options.map((option) => (
           <li
             key={option}
             tabIndex="0"
-            className={`select__option ${(option === activeOption) && `select__option--active`}`}
+            onClick={handleOptionSelect}
+            onKeyDown={handleOptionsSpaceDown}
           >
-            {option}
+            {getOptionComponent(option, option === activeOption)}
           </li>
         ))}
       </ul>
@@ -78,6 +88,7 @@ const Select = ({options, name, initial = ``, onChange = null}) => {
 Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   name: PropTypes.string.isRequired,
+  optionType: PropTypes.string,
   initial: PropTypes.string,
   onChange: PropTypes.func
 };

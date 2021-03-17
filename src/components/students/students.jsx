@@ -35,9 +35,9 @@ const Students = ({searchSubstring, sortType, students}) => (
 );
 
 const mapStateToProps = (state) => ({
-  searchSubstring: state.searchSubstring,
-  sortType: state.sortType,
-  students: state.students
+  searchSubstring: state.active.searchSubstring,
+  sortType: state.active.sortType,
+  students: state.students.items
 });
 
 Students.propTypes = {

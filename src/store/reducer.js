@@ -1,26 +1,16 @@
-import {ActionType} from './actions.js';
-import {SORT_TYPES} from '../const.js';
+import {combineReducers} from 'redux';
+import reducerActive, {initialStateActive} from './reducer-active.js';
+import reducerStudents, {initialStateStudents} from './reducer-students.js';
 
 const initialState = {
-  searchSubstring: ``,
-  sortType: SORT_TYPES[0],
-  studentsIsLoaded: false,
-  students: []
+  active: initialStateActive,
+  students: initialStateStudents
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case ActionType.CHANGE_SEARCH_SUBSTRING:
-      return {...state, searchSubstring: action.payload};
-    case ActionType.CHANGE_SORTTYPE:
-      return {...state, sortType: action.payload};
-    case ActionType.SET_STUDENTS_IS_LOADED:
-      return {...state, studentsIsLoaded: true};
-    case ActionType.UPDATE_STUDENTS:
-      return {...state, students: action.payload};
-    default:
-      return {...initialState};
-  }
-};
+const reducer = combineReducers({
+  active: reducerActive,
+  students: reducerStudents
+});
 
+export {initialState};
 export default reducer;

@@ -3,23 +3,30 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 
-const MenuSearchField = ({onSearchSubstringChange}) => (
+const MenuSearchField = ({searchSubstring = ``, changeSearchSubstring}) => (
   <div className="menu__search-field">
     <input
       className="input"
       type="text"
       placeholder="Поиск по имени"
-      onChange={(evt) => onSearchSubstringChange(evt.target.value)}
+      value={searchSubstring}
+      onChange={(evt) => changeSearchSubstring(evt.target.value)}
     />
   </div>
 );
 
+const mapStateToProps = (store) => ({
+  searchSubstring: store.active.searchSubstring
+});
+
+
 const mapDispatchToProps = (dispatch) => ({
-  onSearchSubstringChange: (newSearchSubstring) => dispatch(ActionCreator.changeSearchSubstring(newSearchSubstring)),
+  changeSearchSubstring: (newSearchSubstring) => dispatch(ActionCreator.changeSearchSubstring(newSearchSubstring)),
 });
 
 MenuSearchField.propTypes = {
-  onSearchSubstringChange: PropTypes.func.isRequired
+  searchSubstring: PropTypes.string,
+  changeSearchSubstring: PropTypes.func.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(MenuSearchField);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuSearchField);

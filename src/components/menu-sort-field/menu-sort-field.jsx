@@ -6,28 +6,28 @@ import {SORT_TYPES} from '../../const.js';
 
 import Select from '../select/select.jsx';
 
-const MenuSortField = ({sortType, onSortTypeChange}) => (
+const MenuSortField = ({sortType, changeSortType}) => (
   <div className="menu__sort-field">
     <Select
       options={SORT_TYPES}
       name="sortType"
       initial={sortType}
-      onChange={onSortTypeChange}
+      onChange={changeSortType}
     />
   </div>
 );
 
 const mapStateToProps = (state) => ({
-  sortType: state.sortType
+  sortType: state.active.sortType
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortTypeChange: (newSortType) => dispatch(ActionCreator.changeSortType(newSortType))
+  changeSortType: (newSortType) => dispatch(ActionCreator.changeSortType(newSortType))
 });
 
 MenuSortField.propTypes = {
   sortType: PropTypes.string.isRequired,
-  onSortTypeChange: PropTypes.func.isRequired
+  changeSortType: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuSortField);

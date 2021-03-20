@@ -4,6 +4,7 @@ import Container from '../container/container.jsx';
 import Header from '../header/header.jsx';
 import Navigation from '../navigation/navigation.jsx';
 import StudentForm from '../student-form/student-form.jsx';
+import Popup from '../popup/popup.jsx';
 
 const NewStudentScreen = () => (
   <React.Fragment>
@@ -15,6 +16,7 @@ const NewStudentScreen = () => (
         <StudentForm/>
       </Container>
     </main>
+    <Popup/>
   </React.Fragment>
 );
 

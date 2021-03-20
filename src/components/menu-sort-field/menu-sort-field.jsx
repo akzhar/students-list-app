@@ -12,7 +12,7 @@ const MenuSortField = ({sortType, changeSortType}) => (
       options={SORT_TYPES}
       name="sortType"
       initial={sortType}
-      onChange={changeSortType}
+      onChange={(newSortType) => changeSortType(newSortType)}
     />
   </div>
 );

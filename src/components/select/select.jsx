@@ -4,18 +4,22 @@ import PropTypes from 'prop-types';
 import SelectOptionText from '../select/select-option-text.jsx';
 import SelectOptionColor from '../select/select-option-color.jsx';
 
-const Select = ({options, name, optionType = `text`, initial = ``, onChange = null}) => {
+const Select = ({options, id, name, optionType = `text`, initial = ``, onChange = null}) => {
 
   const initialValue = (initial && options.find((option) => option === initial)) ? initial : ``;
   const [activeOption, setActiveOption] = useState(initialValue);
+  const inputRef = useRef();
   const selectRef = useRef();
   const selectOptionsRef = useRef();
 
-  const onOptionSelection = (newActiveOption) => {
-    if (activeOption !== newActiveOption) {
-      setActiveOption(newActiveOption);
+  const onOptionSelection = (newValue) => {
+    if (activeOption !== newValue) {
+      setActiveOption(newValue);
       if (onChange) {
-        onChange(newActiveOption);
+        // селект при изменении значения возвращает в переданный cb
+        // свое новое значение и ref на input
+        const select = {newValue, inputRef: inputRef.current};
+        onChange(select);
       }
     }
   };
@@ -54,17 +58,17 @@ const Select = ({options, name, optionType = `text`, initial = ``, onChange = nu
     <div
       className={`select select--${optionType}`}
       ref={selectRef}
-      tabIndex="0"
       onClick={handleSelectClick}
       onKeyDown={handleSelectSpaceDown}
     >
       <input
         type="text"
         readOnly
-        id={name}
+        id={id}
         name={name}
         value={activeOption}
         placeholder="Выбрать"
+        ref={inputRef}
       />
       <ul
         className="select__options"
@@ -87,6 +91,7 @@ const Select = ({options, name, optionType = `text`, initial = ``, onChange = nu
 
 Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   optionType: PropTypes.string,
   initial: PropTypes.string,

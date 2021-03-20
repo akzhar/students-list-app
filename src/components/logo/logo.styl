@@ -3,20 +3,36 @@
   align-items center
 
   img
-    margin 0 45px 0 0
+    margin 0 26px 0 0
 
-  a
+  &__link
     font-weight 600
     font-size 1.4rem
     line-height 3rem
     text-decoration none
     color app_color_text
 
+    &--disable
+      pointer-events none
+      cursor default
+
     &:hover,
     &:active
       opacity 0.6
 
-    span
-      color app_color_brand
+  &__author
+    display none
 
+  &__name
+    color app_color_brand
+    background none
+
+@media(min-width width_desktop)
+  .logo
+
+    img
+      margin-right 45px
+
+    &__author
+      display inline
 

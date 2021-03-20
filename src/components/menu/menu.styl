@@ -1,18 +1,21 @@
 .menu
-  padding-top 36px
-  margin-bottom 32px
+  padding-top 14px
+  margin-bottom 10px
+
+  .button--add
+    margin-top 22px
 
   &__row
     display flex
+    flex-wrap wrap
     justify-content space-between
-    margin-bottom 40px
+    margin-bottom 10px
 
     &:last-child
       margin-bottom 0
 
   &__search-field,
   &__sort-field
-    display flex
     position relative
 
     &::before
@@ -24,6 +27,7 @@
       transform translate(0, -50%)
 
   &__search-field
+    display flex
     width 980px
 
     & .input
@@ -34,15 +38,33 @@
       background url("../../img/icons/search-icon.svg") no-repeat center center
 
   &__sort-field
+    display none
     width 180px
 
     & .select
-      padding-right 55px
-      font-size 0.8rem
+
+      & input[readonly]
+        padding-right 55px
+        font-size 0.8rem
 
       &::after
-        content none
+        content none // скрывает стрелочку селекта
 
     &::before
       right 20px
       background url("../../img/icons/sort-icon.svg") no-repeat center center
+      z-index: 1
+
+@media(min-width width_desktop)
+  .menu
+    padding-top 42px
+    margin-bottom 32px
+
+    .button--add
+      margin-top 0
+
+    &__row
+      margin-bottom 40px
+
+    &__sort-field
+      display flex

@@ -9,26 +9,23 @@ import StudentCard from '../student-card/student-card.jsx';
 const Students = ({searchSubstring, sortType, students}) => (
   <section className="students">
     <div className="students__header">
-      <span></span>
       <span>ФИО</span>
       <span>Специальность</span>
       <span>Группа</span>
       <span>Возраст</span>
       <span>Рейтинг</span>
-      <span></span>
-      <span></span>
     </div>
     <ul className="students__list">
       {students
       .filter((student) => {
         // регистронезависимый поиск
-        const field = student[SEARCH_BY_FIELD].toLowerCase();
+        const fieldValue = student[SEARCH_BY_FIELD].toLowerCase();
         const subString = searchSubstring.toLowerCase();
-        return field.indexOf(subString) !== -1;
+        return fieldValue.indexOf(subString) !== -1;
       })
       .sort(SortTypeToCompareFunc[sortType])
       .map((student) => (
-        <StudentCard key={student.id} student={student}/>
+        <StudentCard key={student.id + student.name + student.age} student={student}/>
       ))}
     </ul>
   </section>

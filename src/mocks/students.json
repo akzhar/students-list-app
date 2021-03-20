@@ -5,7 +5,7 @@
   "rating": "65",
   "age": "21",
   "avatar": "https://www.placecage.com/300/300",
-  "specialization": "Прикладная информатика",
+  "spec": "Прикладная информатика",
   "group": "ПИ-101",
   "sex": "Женский",
   "favoriteColor": "green"
@@ -16,7 +16,7 @@
     "rating": "29",
     "age": "20",
     "avatar": "https://www.fillmurray.com/200/200",
-    "specialization": "Прикладная информатика",
+    "spec": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Женский",
     "favoriteColor": "blue"
@@ -27,7 +27,7 @@
     "rating": "80",
     "age": "19",
     "avatar": "https://www.stevensegallery.com/200/200",
-    "specialization": "Прикладная информатика",
+    "spec": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Мужской",
     "favoriteColor": "black"
@@ -38,7 +38,7 @@
     "rating": "46",
     "age": "22",
     "avatar": "https://www.fillmurray.com/300/200",
-    "specialization": "Прикладная информатика",
+    "spec": "Прикладная информатика",
     "group": "ПИ-101",
     "sex": "Мужской",
     "favoriteColor": "rainbow"

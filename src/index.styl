@@ -1,4 +1,5 @@
 @import "./const.styl"
+@import "./mixin.styl"
 
 @font-face
   font-family 'Geometria-Regular'
@@ -18,23 +19,17 @@ body
 h1
   margin 0
   font-weight 700
-  font-size 2.6rem
-  line-height 3.2rem
+  font-size 2.0rem
+  line-height 1.2em
 
 .visually-hidden
-  position absolute
-  width 1px
-  height 1px
-  margin -1px
-  border 0
-  padding 0
-  white-space nowrap
-  clip-path inset(100%)
-  clip rect(0 0 0 0)
-  overflow hidden
+  hide()
 
 @import "./components/fav-color/fav-color.styl"
 @import "./components/button/button.styl"
+@import "./components/button-delete/button-delete.styl"
+@import "./components/button-close/button-close.styl"
+@import "./components/popup/popup.styl"
 @import "./components/input/input.styl"
 @import "./components/select/select.styl"
 @import "./components/container/container.styl"
@@ -45,3 +40,8 @@ h1
 @import "./components/student-card/student-card.styl"
 @import "./components/navigation/navigation.styl"
 @import "./components/student-form/student-form.styl"
+
+@media(min-width width_desktop)
+  h1
+    font-size 2.6rem
+    line-height 1.2em

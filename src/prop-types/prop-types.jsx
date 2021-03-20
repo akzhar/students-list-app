@@ -6,7 +6,7 @@ const studentTypes = {
   rating: PropTypes.string.isRequired,
   age: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  specialization: PropTypes.string.isRequired,
+  spec: PropTypes.string.isRequired,
   group: PropTypes.string.isRequired,
   sex: PropTypes.string.isRequired,
   favoriteColor: PropTypes.string.isRequired

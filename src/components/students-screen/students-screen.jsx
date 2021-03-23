@@ -11,12 +11,12 @@ import Students from '../students/students.jsx';
 import StudentsEmpty from '../students-empty/students-empty.jsx';
 import Popup from '../popup/popup.jsx';
 
-const StudentsScreen = ({hasStudents, updateStudents, showPopup}) => {
+const StudentsScreen = ({hasStudents, getStudents, showPopup}) => {
 
   useEffect(() => {
     // const onSuccess = () => showPopup(Message.OK.DATA_WAS_LOADED);
     const onFail = () => showPopup(Message.ERROR.DATA_WAS_NOT_LOADED);
-    updateStudents(null, onFail);
+    getStudents(null, onFail);
   }, []);
 
   return <React.Fragment>
@@ -36,13 +36,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateStudents: (onSuccess, onFail) => dispatch(ActionCreator.updateStudents(onSuccess, onFail)),
+  getStudents: (onSuccess, onFail) => dispatch(ActionCreator.getStudents(onSuccess, onFail)),
   showPopup: (message) => dispatch(ActionCreator.showPopup(message))
 });
 
 StudentsScreen.propTypes = {
   hasStudents: PropTypes.bool.isRequired,
-  updateStudents: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
   showPopup: PropTypes.func.isRequired
 };
 

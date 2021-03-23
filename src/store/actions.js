@@ -1,11 +1,12 @@
-import mockStudents from '../mocks/students.json';
+import createApi, {apiRoute} from '../api.js';
+
+const api = createApi();
 
 export const ActionType = {
   CHANGE_ACTIVE_SEARCH_SUBSTRING: `change/active/searchSubstring`,
   CHANGE_ACTIVE_SORTTYPE: `change/active/sortType`,
   SET_POPUP_ISOPEN: `set/popup/isOpen`,
   CHANGE_POPUP_MESSAGE: `change/popup/message`,
-  SET_STUDENTS_IS_LOADED: `set/students/isLoaded`,
   UPDATE_STUDENTS_ITEMS: `update/students/items`
 };
 
@@ -20,47 +21,64 @@ export const ActionCreator = {
     dispatch({type: ActionType.SET_POPUP_ISOPEN, payload: true});
     dispatch({type: ActionType.CHANGE_POPUP_MESSAGE, payload: message});
   },
-  updateStudents: (onSuccess, _onFail) => (dispatch, _getState) => {
-
-    // TODO: API call (GET)
-
-    setTimeout(() => {
-      dispatch({type: ActionType.SET_STUDENTS_IS_LOADED});
-      dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: mockStudents});
-      if (onSuccess) {
-        onSuccess();
-      }
-    }, 1000);
+  getStudents: (onSuccess, onFail) => (dispatch, getState) => {
+    api.get(apiRoute.get.students)
+      .then((response) => {
+        const students = response.data;
+        dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: students});
+      })
+      .then(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
+      })
+      .catch((error) => {
+        if (onFail) {
+          onFail();
+        }
+        throw error;
+      });
   },
-  getStudent: (_studentId) => (_dispatch, _getState) => {
-    // TODO: API call (GET studentId)
+  addStudent: (studentData, onSuccess, onFail) => (dispatch, getState) => {
+    const headers = {
+      'Content-Type': `multipart/form-data`
+    };
+    api.post(apiRoute.post.student, studentData, {headers})
+      .then((response) => {
+        const newStudent = response.data;
+        const students = getState().students.items.slice();
+        dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: [...students, newStudent]});
+      })
+      .then(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
+      })
+      .catch((error) => {
+        if (onFail) {
+          onFail();
+        }
+        throw error;
+      });
   },
-  addStudent: (studentData, onSuccess, _onFail) => (dispatch, getState) => {
-
-    // TODO: API call (POST studentData) - return new user id and avatar url
-
-    setTimeout(() => {
-      const students = getState().students.items.slice();
-      const newStudent = Object.assign({}, studentData);
-      newStudent.id = `neeeew`;
-      newStudent.avatar = `https://www.placecage.com/300/300`;
-      dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: [...students, newStudent]});
-      if (onSuccess) {
-        onSuccess();
-      }
-    }, 1000);
-  },
-  removeStudent: (studentId, onSuccess, _onFail) => (dispatch, getState) => {
-
-    // TODO: API call (DELETE studentId) - return removed user id
-
-    const students = getState().students.items.slice();
-    const newStudents = students.filter((student) => student.id !== studentId);
-    setTimeout(() => {
-      dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: newStudents});
-      if (onSuccess) {
-        onSuccess();
-      }
-    }, 1000);
+  removeStudent: (studentId, onSuccess, onFail) => (dispatch, getState) => {
+    api.delete(apiRoute.delete.student(studentId))
+      .then((response) => {
+        const idToRemove = response;
+        const students = getState().students.items.slice();
+        const newStudents = students.filter((student) => student.id !== idToRemove);
+        dispatch({type: ActionType.UPDATE_STUDENTS_ITEMS, payload: newStudents});
+      })
+      .then(() => {
+        if (onSuccess) {
+          onSuccess();
+        }
+      })
+      .catch((error) => {
+        if (onFail) {
+          onFail();
+        }
+        throw error;
+      });
   }
 };

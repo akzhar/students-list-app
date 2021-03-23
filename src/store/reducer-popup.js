@@ -5,7 +5,7 @@ const initialStatePopup = {
   message: ``,
 };
 
-const reducerPopup = (state, action) => {
+const reducerPopup = (state = initialStatePopup, action) => {
   switch (action.type) {
     case ActionType.SET_POPUP_ISOPEN:
       return {...state, isOpen: action.payload};
@@ -16,5 +16,4 @@ const reducerPopup = (state, action) => {
   }
 };
 
-export {initialStatePopup};
 export default reducerPopup;

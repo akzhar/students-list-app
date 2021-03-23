@@ -6,7 +6,7 @@ const initialStateActive = {
   sortType: SORT_TYPES[0],
 };
 
-const reducerActive = (state, action) => {
+const reducerActive = (state = initialStateActive, action) => {
   switch (action.type) {
     case ActionType.CHANGE_ACTIVE_SEARCH_SUBSTRING:
       return {...state, searchSubstring: action.payload};
@@ -17,5 +17,4 @@ const reducerActive = (state, action) => {
   }
 };
 
-export {initialStateActive};
 export default reducerActive;

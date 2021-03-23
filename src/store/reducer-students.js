@@ -1,14 +1,11 @@
 import {ActionType} from './actions.js';
 
 const initialStateStudents = {
-  isLoaded: false,
   items: []
 };
 
-const reducerStudents = (state, action) => {
+const reducerStudents = (state = initialStateStudents, action) => {
   switch (action.type) {
-    case ActionType.SET_STUDENTS_IS_LOADED:
-      return {...state, isLoaded: true};
     case ActionType.UPDATE_STUDENTS_ITEMS:
       return {...state, items: action.payload};
     default:
@@ -16,5 +13,4 @@ const reducerStudents = (state, action) => {
   }
 };
 
-export {initialStateStudents};
 export default reducerStudents;

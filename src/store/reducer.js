@@ -1,14 +1,7 @@
 import {combineReducers} from 'redux';
-import reducerActive, {initialStateActive} from './reducer-active.js';
-import reducerStudents, {initialStateStudents} from './reducer-students.js';
-import reducerPopup, {initialStatePopup} from './reducer-popup.js';
-
-
-const initialState = {
-  active: initialStateActive,
-  students: initialStateStudents,
-  popup: initialStatePopup
-};
+import reducerActive from './reducer-active.js';
+import reducerStudents from './reducer-students.js';
+import reducerPopup from './reducer-popup.js';
 
 const reducer = combineReducers({
   active: reducerActive,
@@ -16,5 +9,4 @@ const reducer = combineReducers({
   popup: reducerPopup
 });
 
-export {initialState};
 export default reducer;

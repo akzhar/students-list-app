@@ -1,10 +1,10 @@
 export const GROUPS = [`ПИ-101`, `ДМ-234`, `Э-543`, `ЭКО-105`, `Г-456`];
 export const SPECIALISATIONS = [`Прикладная информатика`, `Дискретная математика`, `Экономика`, `Экология`, `Геология`];
-export const SEARCH_BY_FIELD = `name`;
 export const QUESTION_NAMES = [`name`, `email`, `spec`, `group`, `rating`, `sex`, `age`, `favcolor`];
 export const VALID_AVATAR_EXTENSIONS = [`png`, `jpg`, `jpeg`];
 export const SEX_TYPES = [`Мужской`, `Женский`];
 export const AVAILABLE_COLORS = [`blue`, `red`, `green`, `yellow`, `black`, `orange`, `rainbow`];
+export const SEARCH_BY_FIELD = `name`;
 export const SORT_TYPES = [`Имя`, `Рейтинг`, `Возраст`, `Любимый цвет`];
 export const SortTypeToCompareFunc = {
   "Имя": (a, b) => {

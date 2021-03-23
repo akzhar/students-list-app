@@ -1,0 +1,14 @@
+# лог файл для обращений к API
+
+24/3/2021 1:47: API running at http://192.168.31.193:3004
+24/3/2021 1:49: API running at http://192.168.31.193:3004
+24/3/2021 1:49: API running at http://192.168.31.193:3004
+24/3/2021 1:54: GET students
+24/3/2021 1:54: GET students
+24/3/2021 1:55: POST student (id 23)
+24/3/2021 1:55: GET students
+24/3/2021 2:0: API running at http://192.168.31.193:3004
+24/3/2021 2:0: API running at http://192.168.31.193:3004
+24/3/2021 2:3: GET students
+24/3/2021 2:3: GET students
+24/3/2021 2:4: API running at http://192.168.31.193:3004

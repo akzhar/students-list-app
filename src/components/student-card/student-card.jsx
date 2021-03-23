@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
@@ -11,19 +11,25 @@ import ButtonDelete from '../button-delete/button-delete.jsx';
 
 const StudentsCard = ({student, showPopup, removeStudent}) => {
 
+  const cardRef = useRef();
+
   const handleDeleteBtnClick = (evt) => {
+    const card = cardRef.current;
     const studentId = evt.target.value;
-    const onSuccess = () => showPopup(Message.OK.CARD_WAS_REMOVED);
+    const onSuccess = () => {
+      card.parentNode.removeChild(card);
+      showPopup(Message.OK.CARD_WAS_REMOVED);
+    };
     const onFail = () => showPopup(Message.ERROR.CARD_WAS_NOT_REMOVED);
     removeStudent(studentId, onSuccess, onFail);
   };
 
-  return <li className="students__card card">
+  return <li className="students__card card" ref={cardRef}>
     <img className="card__avatar" src={student.avatar} alt={student.name} width="40" height="40"/>
     <div className="card__col-center">
       <p className="card__name">{student.name}</p>
       <div className="card__wrapper">
-        <FavColor color={student.favoriteColor}/>
+        <FavColor color={student.favcolor}/>
         <p className="card__rating">{student.rating}</p>
       </div>
       <p className="card__age">{student.age} <span> {getAgeDeclination(student.age)}</span></p>

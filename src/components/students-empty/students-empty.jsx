@@ -10,7 +10,7 @@ const StudentsEmpty = () => (
       <span>Рейтинг</span>
     </div>
     <div className="students__list students__list--empty">
-      <p>К сожалению тут пока нет ни одного студента...</p>
+      <p>К сожалению, тут пока нет ни одного студента...</p>
     </div>
   </section>
 );

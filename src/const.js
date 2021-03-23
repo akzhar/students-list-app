@@ -1,6 +1,8 @@
+export const GROUPS = [`ПИ-101`, `ДМ-234`, `Э-543`, `ЭКО-105`, `Г-456`];
+export const SPECIALISATIONS = [`Прикладная информатика`, `Дискретная математика`, `Экономика`, `Экология`, `Геология`];
 export const SEARCH_BY_FIELD = `name`;
-export const QUESTION_NAMES = [`name`, `email`, `spec`, `group`, `rating`, `sex`, `age`, `favoriteColor`];
-export const VALID_IMG_TYPES = [`image/png`, `image/jpg`, `image/jpeg`];
+export const QUESTION_NAMES = [`name`, `email`, `spec`, `group`, `rating`, `sex`, `age`, `favcolor`];
+export const VALID_AVATAR_EXTENSIONS = [`png`, `jpg`, `jpeg`];
 export const SEX_TYPES = [`Мужской`, `Женский`];
 export const AVAILABLE_COLORS = [`blue`, `red`, `green`, `yellow`, `black`, `orange`, `rainbow`];
 export const SORT_TYPES = [`Имя`, `Рейтинг`, `Возраст`, `Любимый цвет`];
@@ -17,10 +19,10 @@ export const SortTypeToCompareFunc = {
   "Рейтинг": (a, b) => a.rating - b.rating,
   "Возраст": (a, b) => a.age - b.age,
   "Любимый цвет": (a, b) => {
-    if (a.favoriteColor < b.favoriteColor) {
+    if (a.favcolor < b.favcolor) {
       return -1;
     }
-    if (a.favoriteColor > b.favoriteColor) {
+    if (a.favcolor > b.favcolor) {
       return 1;
     }
     return 0;
@@ -41,7 +43,7 @@ export const Message = {
     CARD_WAS_NOT_CREATED: `Ошибка при попытке создать карточку студента`,
     CARD_WAS_NOT_REMOVED: `Ошибка при удалении карточки студента`,
     NOT_VALID_FIELDS: `Ошибка: заполните корректно все поля формы`,
-    NOT_VALID_AVATAR_TYPE: `Ошибка: загрузите один из следующих форматов: ${VALID_IMG_TYPES.join(`, `)}`
+    NOT_VALID_AVATAR: `Ошибка: загрузите один из следующих форматов: ${VALID_AVATAR_EXTENSIONS.join(`, `)}`
   }
 };
 export const AppRoute = {

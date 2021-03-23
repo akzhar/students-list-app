@@ -2,9 +2,7 @@ import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {QUESTION_NAMES, SEX_TYPES, AVAILABLE_COLORS, VALID_IMG_TYPES, Class, Message} from '../../const.js';
-import SPECIALISATIONS from '../../mocks/specialisations.json';
-import GROUPS from '../../mocks/groups.json';
+import {SPECIALISATIONS, GROUPS, QUESTION_NAMES, SEX_TYPES, AVAILABLE_COLORS, VALID_AVATAR_EXTENSIONS, Class, Message} from '../../const.js';
 
 import Select from '../select/select.jsx';
 
@@ -41,8 +39,8 @@ const StudentForm = ({showPopup, addStudent}) => {
 
   // возвращает массив с именами невалидных полей
   const getNotValidQuestionNames = (studentData) => {
-    const keys = Object.keys(studentData);
-    return keys.filter((key) => !studentData[key]); // поле просто не должно быть пустым
+    // поле просто не должно быть пустым
+    return QUESTION_NAMES.filter((question) => !studentData.get(question));
   };
 
   const markNotValidQuestions = (questionsIds, bool = true) => {
@@ -53,22 +51,9 @@ const StudentForm = ({showPopup, addStudent}) => {
     });
   };
 
-  const getStudentData = (formData) => ({
-    avatar: formData.get(`avatar`),
-    name: formData.get(QUESTION_NAMES[0]),
-    email: formData.get(QUESTION_NAMES[1]),
-    spec: formData.get(QUESTION_NAMES[2]),
-    group: formData.get(QUESTION_NAMES[3]),
-    rating: formData.get(QUESTION_NAMES[4]),
-    sex: formData.get(QUESTION_NAMES[5]),
-    age: formData.get(QUESTION_NAMES[6]),
-    favoriteColor: formData.get(QUESTION_NAMES[7])
-  });
-
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
-    const formData = new FormData(formRef.current);
-    const studentData = getStudentData(formData);
+    const studentData = new FormData(formRef.current);
     const notValidQuestionNames = getNotValidQuestionNames(studentData);
     if (notValidQuestionNames.length) {
       removeWarningStyle();
@@ -82,7 +67,10 @@ const StudentForm = ({showPopup, addStudent}) => {
         formReset();
         btnSubmitRef.current.disabled = false;
       };
-      const onFail = () => showPopup(Message.ERROR.CARD_WAS_NOT_CREATED);
+      const onFail = () => {
+        showPopup(Message.ERROR.CARD_WAS_NOT_CREATED);
+        btnSubmitRef.current.disabled = false;
+      };
       addStudent(studentData, onSuccess, onFail);
     }
   };
@@ -122,12 +110,18 @@ const StudentForm = ({showPopup, addStudent}) => {
   };
 
   const renderAvatarIfFileIsValid = (file) => {
-    if (VALID_IMG_TYPES.includes(file.type)) {
+    const mimeType = file.type.toLowerCase();
+    const fileExtension = mimeType.slice(mimeType.indexOf(`/`) + 1);
+    if (VALID_AVATAR_EXTENSIONS.includes(fileExtension)) {
       const fReader = new FileReader();
+      const dt = new DataTransfer();
       fReader.readAsDataURL(file);
       fReader.addEventListener(`load`, renderAvatar);
+      dt.items.add(file);
+      const fileList = dt.files;
+      avatarInputRef.current.files = fileList;
     } else {
-      showPopup(Message.ERROR.NOT_VALID_AVATAR_TYPE);
+      showPopup(Message.ERROR.NOT_VALID_AVATAR);
     }
   };
 
@@ -180,11 +174,11 @@ const StudentForm = ({showPopup, addStudent}) => {
         </div>
         <div className="student-form__question" id="spec-question">
           <label htmlFor="spec">Специальность</label>
-          <Select options={SPECIALISATIONS.map((option) => option.name)} id="spec" name="spec" onChange={handleSelectChange}/>
+          <Select options={SPECIALISATIONS} id="spec" name="spec" onChange={handleSelectChange}/>
         </div>
         <div className="student-form__question" id="group-question">
           <label htmlFor="group">Группа</label>
-          <Select options={GROUPS.map((option) => option.name)} id="group" name="group" onChange={handleSelectChange}/>
+          <Select options={GROUPS} id="group" name="group" onChange={handleSelectChange}/>
         </div>
         <div className="student-form__question" id="rating-question">
           <label htmlFor="rating">Рейтинг</label>
@@ -200,9 +194,9 @@ const StudentForm = ({showPopup, addStudent}) => {
           <label htmlFor="age">Возраст</label>
           <input className="input" type="number" min="16" max="120" id="age" name="age" placeholder="16" onChange={handleInputChange}/>
         </div>
-        <div className="student-form__question" id="favoriteColor-question">
-          <label htmlFor="favoriteColor">Любимый цвет</label>
-          <Select options={AVAILABLE_COLORS} id="favoriteColor" name="favoriteColor" optionType="color" onChange={handleSelectChange}/>
+        <div className="student-form__question" id="favcolor-question">
+          <label htmlFor="favcolor">Любимый цвет</label>
+          <Select options={AVAILABLE_COLORS} id="favcolor" name="favcolor" optionType="color" onChange={handleSelectChange}/>
         </div>
       </div>
     </fieldset>

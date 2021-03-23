@@ -14,7 +14,7 @@ const ButtonDelete = ({title, value, onClick}) => (
 
 ButtonDelete.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired
 };
 

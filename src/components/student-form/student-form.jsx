@@ -2,9 +2,10 @@ import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {SPECIALISATIONS, GROUPS, QUESTION_NAMES, SEX_TYPES, AVAILABLE_COLORS, VALID_AVATAR_EXTENSIONS, Class, Message} from '../../const.js';
+import {SPECIALISATIONS, GROUPS, QUESTION_NAMES, SEX_TYPES, AVAILABLE_COLORS, Class, Message} from '../../const.js';
 
 import Select from '../select/select.jsx';
+import InputAvatar from '../input-avatar/input-avatar.jsx';
 
 import defaultAvatar from '../../img/avatar.svg';
 
@@ -12,8 +13,6 @@ const StudentForm = ({showPopup, addStudent}) => {
 
   const formRef = useRef();
   const avatarImageRef = useRef();
-  const avatarInputRef = useRef();
-  const avatarDropZoneRef = useRef();
   const btnSubmitRef = useRef();
 
   const formReset = () => {
@@ -79,56 +78,6 @@ const StudentForm = ({showPopup, addStudent}) => {
     }
   };
 
-  const avatarDropZoneHighlight = () => {
-    avatarDropZoneRef.current.classList.add(Class.AVATAR_DROPZONE_DRAGGED_OVER);
-  };
-
-  const avatarDropZoneLowlight = () => {
-    avatarDropZoneRef.current.classList.remove(Class.AVATAR_DROPZONE_DRAGGED_OVER);
-  };
-
-  const onAvatarDropZoneDragOver = (evt) => {
-    evt.preventDefault();
-    avatarDropZoneHighlight();
-  };
-
-  const onAvatarDropZoneDragLeave = (evt) => {
-    evt.preventDefault();
-    avatarDropZoneLowlight();
-  };
-
-  const onAvatarDropZoneDrop = (evt) => {
-    evt.preventDefault();
-    avatarDropZoneLowlight();
-    const file = evt.dataTransfer.files[0];
-    renderAvatarIfFileIsValid(file);
-  };
-
-  const onAvatarInputChange = () => {
-    const file = avatarInputRef.current.files[0];
-    renderAvatarIfFileIsValid(file);
-  };
-
-  const renderAvatar = (evt) => {
-    avatarImageRef.current.src = evt.target.result;
-  };
-
-  const renderAvatarIfFileIsValid = (file) => {
-    const mimeType = file.type.toLowerCase();
-    const fileExtension = mimeType.slice(mimeType.indexOf(`/`) + 1);
-    if (VALID_AVATAR_EXTENSIONS.includes(fileExtension)) {
-      const fReader = new FileReader();
-      const dt = new DataTransfer();
-      fReader.readAsDataURL(file);
-      fReader.addEventListener(`load`, renderAvatar);
-      dt.items.add(file);
-      const fileList = dt.files;
-      avatarInputRef.current.files = fileList;
-    } else {
-      showPopup(Message.ERROR.NOT_VALID_AVATAR);
-    }
-  };
-
   const handleInputChange = (evt) => {
     const input = evt.target;
     const question = input.parentNode;
@@ -148,23 +97,7 @@ const StudentForm = ({showPopup, addStudent}) => {
   };
 
   return <form className="student-form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
-    <fieldset
-      className="student-form__avatar-dropzone"
-      ref={avatarDropZoneRef}
-      onDragOver={onAvatarDropZoneDragOver}
-      onDragLeave={onAvatarDropZoneDragLeave}
-      onDrop={onAvatarDropZoneDrop}
-    >
-      <legend className="visually-hidden">Загрузка аватара нового студента</legend>
-      <div className="student-form__avatar">
-        <img src={defaultAvatar} alt="Аватар нового студента" ref={avatarImageRef}/>
-      </div>
-      <div className="student-form__avatar-upload">
-        <input id="avatar" type="file" name="avatar" ref={avatarInputRef} onChange={onAvatarInputChange}/>
-        <label htmlFor="avatar">Сменить аватар</label>
-        <span>500x500</span>
-      </div>
-    </fieldset>
+    <InputAvatar avatarImageRef={avatarImageRef}/>
     <fieldset className="student-form__questions">
       <legend className="visually-hidden">Вопросы о новом студенте</legend>
       <div className="student-form__col">

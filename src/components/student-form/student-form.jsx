@@ -15,7 +15,7 @@ const StudentForm = ({showPopup, addStudent}) => {
   const avatarImageRef = useRef();
   const btnSubmitRef = useRef();
 
-  const formReset = () => {
+  const resetForm = () => {
     formRef.current.reset();
     avatarImageRef.current.src = defaultAvatar;
     resetAllSelects();
@@ -25,55 +25,61 @@ const StudentForm = ({showPopup, addStudent}) => {
     const selects = formRef.current.querySelectorAll(`.select`);
     selects.forEach((select) => {
       const input = select.querySelector(`input[readonly]`);
-      const optionClass = (select.dataset.type === `text`) ? `select__option` : `select__option-color`;
+      const optionClass = (select.dataset.type === `color`) ? `${Class.SELECT_OPTION}-color` : Class.SELECT_OPTION;
       const activeOption = select.querySelector(`.${optionClass}--active`);
       input.value = ``;
-      activeOption.classList.remove(`${optionClass}--active`);
+      if (activeOption) {
+        activeOption.classList.remove(`${optionClass}--active`);
+      }
     });
   };
 
-  const removeWarningStyle = () => {
-    markNotValidQuestions(QUESTION_NAMES, false);
+  const removeWarnings = () => {
+    applyWarningClassToQuestions(`remove`, QUESTION_NAMES);
   };
 
-  const addWarningStyle = (questionNames) => {
-    markNotValidQuestions(questionNames, true);
+  const addWarnings = (questionNames) => {
+    applyWarningClassToQuestions(`add`, questionNames);
   };
 
-  // возвращает массив с именами невалидных полей
-  const getNotValidQuestionNames = (studentData) => {
+  // ф-ция принимает FormData
+  // ф-ция возвращает массив с именами невалидных вопросов
+  const getNotValidQuestions = (studentData) => {
     // поле просто не должно быть пустым
     return QUESTION_NAMES.filter((question) => !studentData.get(question));
   };
 
-  const markNotValidQuestions = (questionsIds, bool = true) => {
-    const method = bool ? `add` : `remove`;
-    questionsIds.forEach((questionsId) => {
-      const question = formRef.current.querySelector(`#${questionsId}-question`);
+  const applyWarningClassToQuestions = (method, questionNames) => {
+    questionNames.forEach((questionName) => {
+      const question = formRef.current.querySelector(`#${questionName}-question`);
       question.classList[method](Class.QUESTION_WARNING);
     });
+  };
+
+  const onStudentCreation = () => {
+    showPopup(Message.OK.CARD_WAS_CREATED);
+    resetForm();
+    btnSubmitRef.current.disabled = false;
+  };
+
+  const onStudentCreationFail = () => {
+    showPopup(Message.ERROR.CARD_WAS_NOT_CREATED);
+    btnSubmitRef.current.disabled = false;
   };
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     const studentData = new FormData(formRef.current);
-    const notValidQuestionNames = getNotValidQuestionNames(studentData);
-    if (notValidQuestionNames.length) {
-      removeWarningStyle();
-      setTimeout(() => addWarningStyle(notValidQuestionNames), 100);
+    const notValidQuestions = getNotValidQuestions(studentData);
+    removeWarnings();
+    if (notValidQuestions.length) {
+      // задержка нужна для срабатывания анимации при повторной отправке формы
+      setTimeout(() => addWarnings(notValidQuestions), 100);
       showPopup(Message.ERROR.NOT_VALID_FIELDS);
     } else {
       btnSubmitRef.current.disabled = true;
-      removeWarningStyle();
-      const onSuccess = () => {
-        showPopup(Message.OK.CARD_WAS_CREATED);
-        formReset();
-        btnSubmitRef.current.disabled = false;
-      };
-      const onFail = () => {
-        showPopup(Message.ERROR.CARD_WAS_NOT_CREATED);
-        btnSubmitRef.current.disabled = false;
-      };
+      const onSuccess = onStudentCreation;
+      const onFail = onStudentCreationFail;
       addStudent(studentData, onSuccess, onFail);
     }
   };

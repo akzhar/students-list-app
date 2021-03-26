@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_API_URL = `http://192.168.31.193:3004`;
+const BASE_API_URL = `https://students-list-app-api.herokuapp.com`;
 const API_TIMEOUT = 5000;
 
 const apiRoute = {

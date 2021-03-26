@@ -57,6 +57,7 @@ const Select = ({options, id, name, optionType = `text`, initial = ``, onChange 
   return <React.Fragment>
     <div
       className={`select select--${optionType}`}
+      data-type={optionType}
       ref={selectRef}
       onClick={handleSelectClick}
       onKeyDown={handleSelectSpaceDown}

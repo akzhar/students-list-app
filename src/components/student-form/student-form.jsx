@@ -23,9 +23,13 @@ const StudentForm = ({showPopup, addStudent}) => {
   };
 
   const resetAllSelects = () => {
-    const selects = formRef.current.querySelectorAll(`.select input[readonly]`);
+    const selects = formRef.current.querySelectorAll(`.select`);
     selects.forEach((select) => {
-      select.value = ``;
+      const input = select.querySelector(`input[readonly]`);
+      const optionClass = (select.dataset.type === `text`) ? `select__option` : `select__option-color`;
+      const activeOption = select.querySelector(`.${optionClass}--active`);
+      input.value = ``;
+      activeOption.classList.remove(`${optionClass}--active`);
     });
   };
 

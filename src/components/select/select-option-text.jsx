@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {Class} from '../../const.js';
+
 const SelectOptionText = ({option, isActive = false}) => (
-  <div className={`select__option ${isActive && `select__option--active`}`}>
+  <div className={`${Class.SELECT.OPTION} ${isActive && `${Class.SELECT.OPTION}--active`}`}>
     {option}
   </div>
 );

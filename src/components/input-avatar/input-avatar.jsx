@@ -30,11 +30,11 @@ const InputAvatar = ({avatarImageRef, showPopup}) => {
   };
 
   const avatarDropZoneHighlight = () => {
-    avatarDropZoneRef.current.classList.add(Class.AVATAR_DROPZONE_DRAGGED_OVER);
+    avatarDropZoneRef.current.classList.add(`${Class.AVATAR_DROPZONE}--dragged-over`);
   };
 
   const avatarDropZoneLowlight = () => {
-    avatarDropZoneRef.current.classList.remove(Class.AVATAR_DROPZONE_DRAGGED_OVER);
+    avatarDropZoneRef.current.classList.remove(`${Class.AVATAR_DROPZONE}--dragged-over`);
   };
 
   const onAvatarDropZoneDragOver = (evt) => {
@@ -60,7 +60,7 @@ const InputAvatar = ({avatarImageRef, showPopup}) => {
   };
 
   return <fieldset
-    className="student-form__avatar-dropzone"
+    className={Class.AVATAR_DROPZONE}
     ref={avatarDropZoneRef}
     onDragOver={onAvatarDropZoneDragOver}
     onDragLeave={onAvatarDropZoneDragLeave}

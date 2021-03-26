@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 
+import {Class} from '../../const.js';
+
 import ButtonClose from '../button-close/button-close.jsx';
 
 const Popup = ({isOpen, message, hidePopup}) => {
@@ -20,9 +22,9 @@ const Popup = ({isOpen, message, hidePopup}) => {
     };
   }, []);
 
-  return <div className={`popup ${isOpen && `popup--open`}`} id="popup">
-    <div className="popup__window">
-      <p className="popup__message">{message}</p>
+  return <div className={`${Class.POPUP} ${isOpen && `${Class.POPUP}--open`}`} id="popup">
+    <div className={`${Class.POPUP}__window`}>
+      <p className={`${Class.POPUP}__message`}>{message}</p>
       <ButtonClose
         title="Закрыть"
         onClick={hidePopup}

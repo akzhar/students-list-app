@@ -30,8 +30,13 @@ export const SortTypeToCompareFunc = {
 };
 export const Class = {
   QUESTION_WARNING: `student-form__question--warning`,
-  AVATAR_DROPZONE_DRAGGED_OVER: `student-form__avatar-dropzone--dragged-over`,
-  SELECT_OPTION: `select__option`
+  AVATAR_DROPZONE: `student-form__avatar-dropzone`,
+  POPUP: `popup`,
+  SELECT: {
+    ELEM: `select`,
+    OPTIONS_CONTAINER: `select__options`,
+    OPTION: `select__option`
+  }
 };
 export const Message = {
   OK: {

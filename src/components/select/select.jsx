@@ -1,6 +1,8 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 
+import {Class} from '../../const.js';
+
 import SelectOptionText from '../select/select-option-text.jsx';
 import SelectOptionColor from '../select/select-option-color.jsx';
 
@@ -25,8 +27,8 @@ const Select = ({options, id, name, optionType = `text`, initial = ``, onChange 
   };
 
   const toggleSelectOptions = () => {
-    selectRef.current.classList.toggle(`select--opened`);
-    selectOptionsRef.current.classList.toggle(`select__options--opened`);
+    selectRef.current.classList.toggle(`${Class.SELECT.ELEM}--opened`);
+    selectOptionsRef.current.classList.toggle(`${Class.SELECT.OPTIONS_CONTAINER}--opened`);
   };
 
   const handleSelectClick = () => toggleSelectOptions();
@@ -56,7 +58,7 @@ const Select = ({options, id, name, optionType = `text`, initial = ``, onChange 
 
   return <React.Fragment>
     <div
-      className={`select select--${optionType}`}
+      className={`${Class.SELECT.ELEM} ${Class.SELECT.ELEM}--${optionType}`}
       data-type={optionType}
       ref={selectRef}
       onClick={handleSelectClick}
@@ -72,7 +74,7 @@ const Select = ({options, id, name, optionType = `text`, initial = ``, onChange 
         ref={inputRef}
       />
       <ul
-        className="select__options"
+        className={Class.SELECT.OPTIONS_CONTAINER}
         ref={selectOptionsRef}
       >
         {options.map((option) => (

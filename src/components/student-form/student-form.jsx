@@ -84,23 +84,15 @@ const StudentForm = ({showPopup, addStudent}) => {
     }
   };
 
-  const handleInputChange = (evt) => {
-    const input = evt.target;
-    const question = input.parentNode;
+  const removeWarning = (id) => {
+    const question = document.querySelector(`#${id}-question`);
     const isWarning = question.classList.contains(Class.QUESTION_WARNING);
     if (isWarning) {
       question.classList.remove(Class.QUESTION_WARNING);
     }
   };
 
-  const handleSelectChange = ({inputRef}) => {
-    const questionId = inputRef.id;
-    const question = document.querySelector(`#${questionId}-question`);
-    const isWarning = question.classList.contains(Class.QUESTION_WARNING);
-    if (isWarning) {
-      question.classList.remove(Class.QUESTION_WARNING);
-    }
-  };
+  const handleQuestionChange = (id) => removeWarning(id);
 
   return <form className="student-form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
     <InputAvatar avatarImageRef={avatarImageRef}/>
@@ -109,37 +101,37 @@ const StudentForm = ({showPopup, addStudent}) => {
       <div className="student-form__col">
         <div className="student-form__question" id="name-question">
           <label htmlFor="name">ФИО</label>
-          <input className="input" type="text" name="name" id="name" placeholder="Иванов Иван Иванович" onChange={handleInputChange}/>
+          <input className="input" type="text" name="name" id="name" placeholder="Иванов Иван Иванович" onChange={(evt) => handleQuestionChange(evt.target.id)}/>
         </div>
         <div className="student-form__question" id="email-question">
           <label htmlFor="email">Email</label>
-          <input className="input" type="email" id="email" name="email" placeholder="ivanov@gmail.com" onChange={handleInputChange}/>
+          <input className="input" type="email" id="email" name="email" placeholder="ivanov@gmail.com" onChange={(evt) => handleQuestionChange(evt.target.id)}/>
         </div>
         <div className="student-form__question" id="spec-question">
           <label htmlFor="spec">Специальность</label>
-          <Select options={SPECIALISATIONS} id="spec" name="spec" onChange={handleSelectChange}/>
+          <Select options={SPECIALISATIONS} id="spec" name="spec" onChange={({id}) => handleQuestionChange(id)}/>
         </div>
         <div className="student-form__question" id="group-question">
           <label htmlFor="group">Группа</label>
-          <Select options={GROUPS} id="group" name="group" onChange={handleSelectChange}/>
+          <Select options={GROUPS} id="group" name="group" onChange={({id}) => handleQuestionChange(id)}/>
         </div>
         <div className="student-form__question" id="rating-question">
           <label htmlFor="rating">Рейтинг</label>
-          <input className="input" type="number" min="1" id="rating" name="rating" placeholder="0" onChange={handleInputChange}/>
+          <input className="input" type="number" min="1" id="rating" name="rating" placeholder="0" onChange={(evt) => handleQuestionChange(evt.target.id)}/>
         </div>
       </div>
       <div className="student-form__col">
         <div className="student-form__question" id="sex-question">
           <label htmlFor="sex">Пол</label>
-          <Select options={SEX_TYPES} id="sex" name="sex" onChange={handleSelectChange}/>
+          <Select options={SEX_TYPES} id="sex" name="sex" onChange={({id}) => handleQuestionChange(id)}/>
         </div>
         <div className="student-form__question" id="age-question">
           <label htmlFor="age">Возраст</label>
-          <input className="input" type="number" min="16" max="120" id="age" name="age" placeholder="16" onChange={handleInputChange}/>
+          <input className="input" type="number" min="16" max="120" id="age" name="age" placeholder="16" onChange={(evt) => handleQuestionChange(evt.target.id)}/>
         </div>
         <div className="student-form__question" id="favcolor-question">
           <label htmlFor="favcolor">Любимый цвет</label>
-          <Select options={AVAILABLE_COLORS} id="favcolor" name="favcolor" optionType="color" onChange={handleSelectChange}/>
+          <Select options={AVAILABLE_COLORS} id="favcolor" name="favcolor" selectType="color" onChange={({id}) => handleQuestionChange(id)}/>
         </div>
       </div>
     </fieldset>

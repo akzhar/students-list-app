@@ -24,10 +24,8 @@ const StudentForm = ({showPopup, addStudent}) => {
   const resetAllSelects = () => {
     const selects = formRef.current.querySelectorAll(`.select`);
     selects.forEach((select) => {
-      const input = select.querySelector(`input[readonly]`);
       const optionClass = (select.dataset.type === `color`) ? `${Class.SELECT.OPTION}-color` : Class.SELECT.OPTION;
       const activeOption = select.querySelector(`.${optionClass}--active`);
-      input.value = ``;
       if (activeOption) {
         activeOption.classList.remove(`${optionClass}--active`);
       }

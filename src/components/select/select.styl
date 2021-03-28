@@ -93,10 +93,12 @@
     background-color app_color_brand--light
 
 .select__option-color
-  width 30px
-  height 30px
 
-  &--active,
-  &:focus,
-  &:hover
+  .fav-color
+    width 30px
+    height 30px
+
+  &--active .fav-color,
+  &:focus .fav-color,
+  &:hover .fav-color
     shadow-small()

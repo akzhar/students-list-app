@@ -73,32 +73,34 @@ URL клиентской части: https://students-list-app-client.herokuapp.
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/7.png)
 
 8. Затем команду `heroku git:remote -a <имя приложения на Heroku>`
+  ![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/8.png)
 
-![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/8.png)
-
-9. Далее последовательно выполняем команды `git add .`, `git commit -m "<commit name>"`, `git push heroku master``
+9. Далее выполняем команду `npm run deploy` - быстрый деплой всех изменений в ваш Heroku репозиторий в ветку master, имя коммита `heroku deploy`. Если необходимо дать нормальное имя коммиту необходимо заменить команду `npm run deploy` на 3 последовательные команды: `git add .`, `git commit -m "<commit name>"`, `git push heroku master`.
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/9.png)
+
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/10.png)
+
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/11.png) 
 
 10. Убеждаемся, что деплой был выполнен успешно: запускаем логи Heroku командой `npm run logs` ИЛИ, открыв логи Heroku приложения в браузере: сделать это можно, нажав на `More` → `View logs`
+  ![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/12.png)
 
-![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/12.png)
-
-![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/api/22.png)
+  ![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/api/22.png)
 
 11. В случае, если наше приложение не запустилось, сделать это можно вручную:
 	- в консоли командой `npm run app-on`
 	- в браузере, открыв свое приложение и перейдя в раздел `Resources`, там есть тумблер для включения / выключения приложения
-
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/13.png)
+
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/14.png)
+
 	![step visualization](https://raw.githubusercontent.com/akzhar/readme-demos-media/main/students-list-app/client/15.png)
 
 <a  id="3"></a>
 
 ## <a href="#up">↑</a> 3. Команды для работы с приложением из консоли в локальном репозитории
 
+- `npm run deploy` - быстрый деплой всех изменений в ваш Heroku репозиторий в ветку master, имя коммита `heroku deploy`. Если необходимо дать нормальное имя коммиту необходимо заменить команду `npm run deploy` на 3 последовательные команды: `git add .`, `git commit -m "<commit name>"`, `git push heroku master`. PS: все изменения нужно делать в основном Github репозитории с исходниками, тестировать локально (для запуска клиентской части локально есть скрипт `npm start`) и затем собирать проект скриптом `npm run build`. Собранный проект деплоить на Heroku из отдельного git репозитория с помощью `npm run deploy`.
 - `npm run logs` - открыть логи приложения прямо в консоли (также логи можно смотреть тут: `https://dashboard.heroku.com/apps/<имя приложения на Heroku>/logs`)
 - `npm run app-off` - остановка приложения на Heroku
 - `npm run app-on` - запуск приложения на Heroku

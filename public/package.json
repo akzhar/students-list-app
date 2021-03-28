@@ -6,7 +6,7 @@
   "description": "Doubletapp test task | Client",
   "scripts": {
     "start": "node index.js",
-    "deploy": "git add . && git commit -m \"heroku deploy\" && git push heroku main",
+    "deploy": "git add . && git commit -m \"heroku deploy\" && git push heroku master",
     "logs": "heroku logs --tail",
     "app-on": "heroku ps:scale web=1",
     "app-off": "heroku ps:scale web=0"
